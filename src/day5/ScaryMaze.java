@@ -12,6 +12,7 @@ import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 import javax.swing.JApplet;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
@@ -23,13 +24,13 @@ public class ScaryMaze extends JPanel implements Runnable, MouseMotionListener {
 
 	ScaryMaze() throws Exception {
 		//1. Use this online tool to make a maze image and drop it into your day5 package: http://pixlr.com/editor/
-		maze = ImageIO.read(getClass().getResource("maze.png"));
+		maze = ImageIO.read(getClass().getResource("mazwe.jpg"));
 		//2. set the mouse pointer to the start of your maze using:
 		//new Robot().mouseMove(xPosition, yPosition)
-		
+		new Robot().mouseMove( 312, 140 );
 		//3. add a mouse motion listener using:
 		//addMouseMotionListener(this)
-		
+		addMouseMotionListener(this);
 	}
 
 	@Override
@@ -38,18 +39,20 @@ public class ScaryMaze extends JPanel implements Runnable, MouseMotionListener {
 		int mouseY = e.getY();
 		int mouseColor = maze.getRGB(mouseX, mouseY);
 		//4. print the mouseColor variable to see what color the mouse is touching
-
+System.out.println(mouseX + " " + mouseY + " " + mouseColor);
 		//5. make a variable to hold the background color. 
-
-		//6. if the mouse falls off the path (if it is on the background)
-		
+		int backColor = -1;
+//6. if the mouse falls off the path (if it is on the background)
+		if(mouseColor == backColor){
 				// call the scare method
-		
+		scare();
+		}
 		//10. if the mouse is on the end color
-				
+		if(mouseColor == -10419964)		
 				// pop up a message to tell them they won
-		
+	JOptionPane.showMessageDialog(null, "You've won");
 	}
+	
 
 	private void scare() {
 		System.out.println("BOO!");
@@ -59,7 +62,7 @@ public class ScaryMaze extends JPanel implements Runnable, MouseMotionListener {
 		//8. play the scary sound. Hint: type "sound" and then a period.		
 		
 		//9. drop an image into your day5 package, and use the showScaryImage method to scare your victim!
-
+showScaryImage("zombiesounds.wav");
 	}
 
 	private void showScaryImage(String imageName) {
